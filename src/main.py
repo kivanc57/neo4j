@@ -47,9 +47,9 @@ def insert_data(conn):
     df = pd.read_excel(excel_path)
 
     query = """
-    CREATE (kdo:Kdo {name: $kdo_name})
-    CREATE (koho:Koho {name: $koho_name})
-    CREATE (kdo)-[:CITED {format: $format, rok: $rok, číslo: $cislo, časopis: $casopis}]->(koho)
+    MERGE (kdo:Kdo {name: $kdo_name})
+    MERGE (koho:Koho {name: $koho_name})
+    MERGE (kdo)-[:CITED {format: $format, rok: $rok, číslo: $cislo, časopis: $casopis}]->(koho)
     """
 
     for _, row in df.iterrows():
